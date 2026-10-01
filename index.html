@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Ocean Production | Event Registration</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        OCEAN <span>PRODUCTION</span>
+    </div>
+
+    <div class="tagline">
+        EVENT PRODUCTION & SPECIAL EFFECTS
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+
+        <h1>Event Registration</h1>
+
+        <p>
+            Tell us about your event and our team will contact you.
+        </p>
+
+    </section>
+
+
+    <form id="registrationForm">
+
+        <!-- CUSTOMER DETAILS -->
+
+        <div class="section">
+
+            <h2>01. Customer Details</h2>
+
+            <div class="grid">
+
+                <div class="field">
+
+                    <label>Full Name *</label>
+
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Mobile Number *</label>
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="10 digit mobile number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>WhatsApp Number</label>
+
+                    <input
+                        type="tel"
+                        id="whatsapp"
+                        placeholder="WhatsApp number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="example@gmail.com"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EVENT DETAILS -->
+
+        <div class="section">
+
+            <h2>02. Event Details</h2>
+
+            <div class="grid">
+
+                <div class="field">
+
+                    <label>Event Type *</label>
+
+                    <select id="eventType" required>
+
+                        <option value="">
+                            Select Event Type
+                        </option>
+
+                        <option>Wedding</option>
+                        <option>Birthday</option>
+                        <option>Engagement</option>
+                        <option>Reception</option>
+                        <option>Corporate Event</option>
+                        <option>College Event</option>
+                        <option>Festival</option>
+                        <option>Garba Event</option>
+                        <option>Product Launch</option>
+                        <option>Concert</option>
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Event Date *</label>
+
+                    <input
+                        type="date"
+                        id="eventDate"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Event Time</label>
+
+                    <input
+                        type="time"
+                        id="eventTime"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Expected Guests</label>
+
+                    <input
+                        type="number"
+                        id="guests"
+                        placeholder="e.g. 500"
+                        min="1"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Venue *</label>
+
+                    <input
+                        type="text"
+                        id="venue"
+                        placeholder="Event venue"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>City</label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="City"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SERVICES -->
+
+        <div class="section">
+
+            <h2>03. Services Required</h2>
+
+            <p class="help">
+                Select all services you are interested in.
+            </p>
+
+
+            <div class="services">
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="Cold Pyro"
+                    >
+                    <span>Cold Pyro</span>
+                </label>
+
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="Confetti"
+                    >
+                    <span>Confetti</span>
+                </label>
+
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="CO2 Gun"
+                    >
+                    <span>CO₂ Gun</span>
+                </label>
+
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="Paper Blower"
+                    >
+                    <span>Paper Blower</span>
+                </label>
+
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="Stage Effects"
+                    >
+                    <span>Stage Effects</span>
+                </label>
+
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="Drone Show"
+                    >
+                    <span>Drone Show</span>
+                </label>
+
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="Backstage Effects"
+                    >
+                    <span>Backstage Effects</span>
+                </label>
+
+
+                <label class="service">
+                    <input
+                        type="checkbox"
+                        name="service"
+                        value="Other"
+                    >
+                    <span>Other</span>
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUDGET -->
+
+        <div class="section">
+
+            <h2>04. Budget & Requirements</h2>
+
+            <div class="field">
+
+                <label>Approximate Budget</label>
+
+                <select id="budget">
+
+                    <option value="">
+                        Select Budget
+                    </option>
+
+                    <option value="Below ₹10,000">
+                        Below ₹10,000
+                    </option>
+
+                    <option value="₹10,000 - ₹25,000">
+                        ₹10,000 - ₹25,000
+                    </option>
+
+                    <option value="₹25,000 - ₹50,000">
+                        ₹25,000 - ₹50,000
+                    </option>
+
+                    <option value="₹50,000 - ₹1,00,000">
+                        ₹50,000 - ₹1,00,000
+                    </option>
+
+                    <option value="₹1,00,000+">
+                        ₹1,00,000+
+                    </option>
+
+                    <option value="Not Decided">
+                        Not Decided
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Additional Requirements</label>
+
+                <textarea
+                    id="requirements"
+                    rows="5"
+                    placeholder="Tell us about your event..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <div class="submit-section">
+
+            <button
+                type="submit"
+                id="submitButton"
+            >
+                Submit Registration
+            </button>
+
+            <p id="formMessage"></p>
+
+        </div>
+
+    </form>
+
+
+    <!-- SUCCESS BOX -->
+
+    <div
+        id="successBox"
+        class="success-box hidden"
+    >
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>Registration Successful!</h2>
+
+        <p>
+            Thank you for contacting Ocean Production.
+        </p>
+
+        <div class="registration-number">
+
+            Registration ID
+
+            <strong id="registrationNumber">
+                OP-00001
+            </strong>
+
+        </div>
+
+        <p>
+            Please save your Registration ID.
+        </p>
+
+        <button
+            onclick="location.reload()"
+            class="new-button"
+        >
+            New Registration
+        </button>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <strong>OCEAN PRODUCTION</strong>
+
+    <p>
+        Event Production & Special Effects
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
