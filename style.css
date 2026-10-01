@@ -1,0 +1,294 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: radial-gradient(circle at top, #242424, #080808 65%);
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+.header {
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid #292929;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #ff6b00;
+}
+
+.tagline {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #999;
+    letter-spacing: 2px;
+}
+
+/* MAIN */
+
+.container {
+    width: 92%;
+    max-width: 950px;
+    margin: 35px auto 60px;
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #aaa;
+}
+
+/* SECTION */
+
+.section {
+    background: #151515;
+    border: 1px solid #292929;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    font-size: 19px;
+    margin-bottom: 20px;
+    color: #ff7a00;
+}
+
+.help {
+    color: #999;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+/* GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+/* INPUTS */
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 7px;
+    color: #ddd;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #3b3b3b;
+    border-radius: 9px;
+    background: #0e0e0e;
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.12);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* SERVICES */
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.service {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid #333;
+    border-radius: 9px;
+    background: #0e0e0e;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.service:hover {
+    border-color: #ff6b00;
+}
+
+.service input {
+    width: auto;
+}
+
+/* SUBMIT */
+
+.submit-section {
+    text-align: center;
+    margin-top: 25px;
+}
+
+#submitButton {
+    width: 100%;
+    max-width: 500px;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ff8a00, #ff4500);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#submitButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 100, 0, 0.25);
+}
+
+#submitButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#formMessage {
+    margin-top: 15px;
+    color: #ff7777;
+}
+
+/* SUCCESS */
+
+.success-box {
+    background: #151515;
+    border: 1px solid #333;
+    border-radius: 18px;
+    padding: 45px 25px;
+    text-align: center;
+}
+
+.success-icon {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    border-radius: 50%;
+    background: #16894c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+}
+
+.success-box h2 {
+    margin-top: 20px;
+}
+
+.success-box p {
+    color: #aaa;
+    margin-top: 10px;
+}
+
+.registration-number {
+    margin: 25px auto;
+    max-width: 350px;
+    padding: 20px;
+    background: #0d0d0d;
+    border-radius: 10px;
+    color: #aaa;
+}
+
+.registration-number strong {
+    display: block;
+    color: #ff7800;
+    font-size: 25px;
+    margin-top: 8px;
+}
+
+.new-button {
+    margin-top: 15px;
+    padding: 13px 25px;
+    background: #ff6b00;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid #222;
+    color: #777;
+}
+
+footer strong {
+    color: #ff6b00;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .section {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+}
