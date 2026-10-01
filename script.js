@@ -4,7 +4,7 @@
 // ==========================================
 
 // Your Supabase Project URL
-const SUPABASE_URL = "https://nepianzfbysukaoqqbxf.supabase.co/rest/v1/";
+const SUPABASE_URL = "https://nepianzfbysukaoqqbxf.supabase.co";
 
 // Your Supabase Publishable Key
 const SUPABASE_KEY = "sb_publishable_vA6sXJTvJO5QWY6BPyH79g_muuyN9_8";
