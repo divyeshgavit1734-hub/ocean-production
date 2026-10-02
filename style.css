@@ -291,4 +291,18 @@ footer strong {
     .logo {
         font-size: 23px;
     }
+.admin-login-link {
+    display: inline-block;
+    margin: 15px;
+    padding: 10px 18px;
+    background: #07111f;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.admin-login-link:hover {
+    opacity: 0.85;
+}
 }
