@@ -172,6 +172,28 @@
                 align-items: flex-start;
                 flex-direction: column;
             }
+.action-button {
+    display: inline-block;
+    margin: 3px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.call-button {
+    background: #198754;
+}
+
+.whatsapp-button {
+    background: #25D366;
+}
+
+.email-button {
+    background: #0d6efd;
+}
         }
     </style>
 </head>
@@ -251,15 +273,16 @@
 
             <thead>
                 <tr>
-                    <th>Registration ID</th>
-                    <th>Customer</th>
-                    <th>Contact</th>
-                    <th>Event</th>
-                    <th>Date</th>
-                    <th>Venue</th>
-                    <th>Services</th>
-                    <th>Budget</th>
-                    <th>Status</th>
+                    <<th>RegistrationID</th>
+<th>Customer</th>
+<th>Contact</th>
+<th>Event</th>
+<th>Date</th>
+<th>Venue</th>
+<th>Services</th>
+<th>Budget</th>
+<th>Status</th>
+<th>Actions</th>
                 </tr>
             </thead>
 
@@ -471,6 +494,39 @@ function displayRegistrations(data) {
                     ${escapeHTML(item.status || "New")}
                 </span>
             </td>
+<td>
+
+    <a
+        href="tel:${encodeURIComponent(item.mobile || "")}"
+        class="action-button call-button"
+    >
+        📞 Call
+    </a>
+
+    <a
+        href="https://wa.me/91${String(item.mobile || "").replace(/\D/g, "")}"
+        target="_blank"
+        class="action-button whatsapp-button"
+    >
+        💬 WhatsApp
+    </a>
+
+    ${
+        item.email
+        ?
+        `
+        <a
+            href="mailto:${encodeURIComponent(item.email)}"
+            class="action-button email-button"
+        >
+            ✉️ Email
+        </a>
+        `
+        :
+        ""
+    }
+
+</td>
 
         `;
 
