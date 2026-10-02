@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ocean Production | Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #17202a;
+        }
+
+        header {
+            background: #07111f;
+            color: white;
+            padding: 18px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .brand span {
+            color: #20c997;
+        }
+
+        button {
+            border: 0;
+            border-radius: 8px;
+            padding: 11px 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #logoutButton {
+            background: #e74c3c;
+            color: white;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #687078;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        .stat-number {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .search-box {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccd1d5;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow-x: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+
+        th {
+            background: #07111f;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e8eaed;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #e8f7ee;
+            color: #198754;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        #message {
+            text-align: center;
+            padding: 20px;
+            color: #687078;
+        }
+
+        @media (max-width: 700px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+
+        <div class="brand">
+            OCEAN <span>PRODUCTION</span>
+            <div style="font-size:12px; font-weight:normal;">
+                Admin Dashboard
+            </div>
+        </div>
+
+        <button id="logoutButton">
+            Logout
+        </button>
+
+    </div>
+</header>
+
+
+<main>
+
+    <div class="top-section">
+
+        <div>
+            <h1>Registrations</h1>
+            <div class="subtitle">
+                Ocean Production Customer Management
+            </div>
+        </div>
+
+        <button onclick="loadRegistrations()">
+            Refresh
+        </button>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <div>Total Registrations</div>
+            <div class="stat-number" id="totalCount">0</div>
+        </div>
+
+        <div class="stat">
+            <div>New</div>
+            <div class="stat-number" id="newCount">0</div>
+        </div>
+
+        <div class="stat">
+            <div>Upcoming Events</div>
+            <div class="stat-number" id="upcomingCount">0</div>
+        </div>
+
+    </div>
+
+
+    <div class="search-box">
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="Search name, mobile, venue, city or registration ID..."
+        >
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Registration ID</th>
+                    <th>Customer</th>
+                    <th>Contact</th>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Venue</th>
+                    <th>Services</th>
+                    <th>Budget</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="registrationTable">
+
+            </tbody>
+
+        </table>
+
+        <div id="message">
+            Loading registrations...
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://nepianzfbysukaoqxbxf.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_vA6sXJTvJO5QWY6BPyH79g_muuyN9_8";
+
+
+const db =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+let registrations = [];
+
+
+// ==========================================
+// SECURITY CHECK
+// ==========================================
+
+async function checkLogin() {
+
+    const {
+        data: { session }
+    } = await db.auth.getSession();
+
+    if (!session) {
+
+        window.location.href = "admin.html";
+
+        return false;
+    }
+
+    return true;
+}
+
+
+// ==========================================
+// LOAD REGISTRATIONS
+// ==========================================
+
+async function loadRegistrations() {
+
+    const loggedIn =
+        await checkLogin();
+
+    if (!loggedIn) return;
+
+
+    const table =
+        document.getElementById(
+            "registrationTable"
+        );
+
+    const message =
+        document.getElementById("message");
+
+
+    message.textContent =
+        "Loading registrations...";
+
+
+    const {
+        data,
+        error
+    } = await db
+        .from("registrations")
+        .select("*")
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        message.textContent =
+            "Unable to load registrations.";
+
+        return;
+    }
+
+
+    registrations = data || [];
+
+    displayRegistrations(registrations);
+
+    updateStats(registrations);
+}
+
+
+// ==========================================
+// DISPLAY DATA
+// ==========================================
+
+function displayRegistrations(data) {
+
+    const table =
+        document.getElementById(
+            "registrationTable"
+        );
+
+    const message =
+        document.getElementById("message");
+
+
+    table.innerHTML = "";
+
+
+    if (data.length === 0) {
+
+        message.textContent =
+            "No registrations found.";
+
+        return;
+    }
+
+
+    message.textContent = "";
+
+
+    data.forEach(function(item) {
+
+        const row =
+            document.createElement("tr");
+
+
+        let services = "";
+
+
+        if (Array.isArray(item.services)) {
+
+            services =
+                item.services.join(", ");
+
+        } else {
+
+            services =
+                item.services || "-";
+        }
+
+
+        row.innerHTML = `
+
+            <td>
+                <strong>
+                    ${escapeHTML(item.registration_id || "-")}
+                </strong>
+            </td>
+
+            <td>
+                ${escapeHTML(item.full_name || "-")}
+            </td>
+
+            <td>
+                ${escapeHTML(item.mobile || "-")}
+                <br>
+                ${escapeHTML(item.email || "")}
+            </td>
+
+            <td>
+                ${escapeHTML(item.event_type || "-")}
+            </td>
+
+            <td>
+                ${escapeHTML(item.event_date || "-")}
+                <br>
+                ${escapeHTML(item.event_time || "")}
+            </td>
+
+            <td>
+                ${escapeHTML(item.venue || "-")}
+                <br>
+                ${escapeHTML(item.city || "")}
+            </td>
+
+            <td>
+                ${escapeHTML(services)}
+            </td>
+
+            <td>
+                ${escapeHTML(item.budget || "-")}
+            </td>
+
+            <td>
+                <span class="status">
+                    ${escapeHTML(item.status || "New")}
+                </span>
+            </td>
+
+        `;
+
+
+        table.appendChild(row);
+
+    });
+
+}
+
+
+// ==========================================
+// STATISTICS
+// ==========================================
+
+function updateStats(data) {
+
+    document.getElementById(
+        "totalCount"
+    ).textContent = data.length;
+
+
+    const newRegistrations =
+        data.filter(function(item) {
+
+            return (
+                String(item.status || "")
+                    .toLowerCase() === "new"
+            );
+
+        }).length;
+
+
+    document.getElementById(
+        "newCount"
+    ).textContent =
+        newRegistrations;
+
+
+    const today =
+        new Date();
+
+    today.setHours(0, 0, 0, 0);
+
+
+    const upcoming =
+        data.filter(function(item) {
+
+            if (!item.event_date) {
+                return false;
+            }
+
+            const eventDate =
+                new Date(item.event_date);
+
+            return eventDate >= today;
+
+        }).length;
+
+
+    document.getElementById(
+        "upcomingCount"
+    ).textContent =
+        upcoming;
+}
+
+
+// ==========================================
+// SEARCH
+// ==========================================
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        function() {
+
+            const search =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            if (!search) {
+
+                displayRegistrations(
+                    registrations
+                );
+
+                return;
+            }
+
+
+            const filtered =
+                registrations.filter(
+                    function(item) {
+
+                        return [
+
+                            item.registration_id,
+                            item.full_name,
+                            item.mobile,
+                            item.email,
+                            item.event_type,
+                            item.venue,
+                            item.city,
+                            item.budget
+
+                        ]
+                        .join(" ")
+                        .toLowerCase()
+                        .includes(search);
+
+                    }
+                );
+
+
+            displayRegistrations(filtered);
+
+        }
+    );
+
+
+// ==========================================
+// ESCAPE HTML
+// ==========================================
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+document
+    .getElementById("logoutButton")
+    .addEventListener(
+        "click",
+        async function() {
+
+            await db.auth.signOut();
+
+            window.location.href =
+                "admin.html";
+
+        }
+    );
+
+
+// ==========================================
+// START
+// ==========================================
+
+loadRegistrations();
+
+</script>
+
+</body>
+</html>
