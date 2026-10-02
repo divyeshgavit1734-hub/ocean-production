@@ -305,4 +305,13 @@ footer strong {
 .admin-login-link:hover {
     opacity: 0.85;
 }
+.details-button {
+    background: #6f42c1;
+    border: none;
+    cursor: pointer;
+}
+
+.details-button:hover {
+    opacity: 0.85;
+}
 }
