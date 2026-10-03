@@ -148,6 +148,37 @@
             .container {
                 padding: 12px;
             }
+async function showDetails(id) {
+
+    const { data, error } = await db
+        .from("registrations")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        alert("Could not load registration details.");
+        return;
+    }
+
+    alert(
+        "Registration ID: " + (data.registration_id || "-") +
+        "\n\nName: " + (data.full_name || "-") +
+        "\nMobile: " + (data.mobile || "-") +
+        "\nWhatsApp: " + (data.whatsapp || "-") +
+        "\nEmail: " + (data.email || "-") +
+        "\n\nEvent: " + (data.event_type || "-") +
+        "\nDate: " + (data.event_date || "-") +
+        "\nTime: " + (data.event_time || "-") +
+        "\nVenue: " + (data.venue || "-") +
+        "\nCity: " + (data.city || "-") +
+        "\nGuests: " + (data.guests || "-") +
+        "\n\nServices: " + (data.services || "-") +
+        "\nBudget: " + (data.budget || "-") +
+        "\nRequirements: " + (data.requirements || "-") +
+        "\nStatus: " + (data.status || "New")
+    );
+}
         }
     </style>
 </head>
