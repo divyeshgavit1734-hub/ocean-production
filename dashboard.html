@@ -468,7 +468,13 @@ function renderRegistrations(items) {
    <button type="button" onclick="showDetails('${item.id}')">
     Details
 </button>
-</td>
+
+<button
+    type="button"
+    onclick="deleteRegistration('${item.id}')"
+>
+    🗑️ Delete
+</button></td>
         </tr>
 
     `).join("");
