@@ -593,7 +593,30 @@ async function updateStatus(id, newStatus) {
 
     loadRegistrations();
 }
+async function deleteRegistration(id) {
 
+    const confirmed = confirm(
+        "Are you sure you want to delete this registration?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const { error } = await db
+        .from("registrations")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        alert("Could not delete registration:\n" + error.message);
+        return;
+    }
+
+    alert("Registration deleted successfully.");
+
+    loadRegistrations();
+}
 </script>
 
 </body>
