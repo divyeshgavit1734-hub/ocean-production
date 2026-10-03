@@ -157,7 +157,7 @@ async function showDetails(id) {
         .single();
 
     if (error) {
-        alert("Could not load registration details.");
+        alert("Could not load registration details:\n" + error.message);
         return;
     }
 
