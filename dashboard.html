@@ -571,6 +571,22 @@ async function showDetails(id) {
         "\nStatus: " + (data.status || "New")
     );
 }
+async function updateStatus(id, newStatus) {
+
+    const { error } = await db
+        .from("registrations")
+        .update({ status: newStatus })
+        .eq("id", id);
+
+    if (error) {
+        alert("Could not update status:\n" + error.message);
+        return;
+    }
+
+    alert("Status updated to: " + newStatus);
+
+    loadRegistrations();
+}
 
 </script>
 
