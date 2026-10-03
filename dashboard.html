@@ -456,11 +456,14 @@ function renderRegistrations(items) {
                 ${escapeHTML(item.budget || "-")}
             </td>
 
-            <td>
-                <span class="status">
-                    ${escapeHTML(item.status || "New")}
-                </span>
-            </td>
+           <td>
+    <select onchange="updateStatus('${item.id}', this.value)">
+        <option value="New" ${item.status === "New" ? "selected" : ""}>New</option>
+        <option value="Confirmed" ${item.status === "Confirmed" ? "selected" : ""}>Confirmed</option>
+        <option value="Completed" ${item.status === "Completed" ? "selected" : ""}>Completed</option>
+        <option value="Cancelled" ${item.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+    </select>
+</td>
 <td>
    <button type="button" onclick="showDetails('${item.id}')">
     Details
