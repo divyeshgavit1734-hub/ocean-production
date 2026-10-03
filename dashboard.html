@@ -460,7 +460,14 @@ function renderRegistrations(items) {
                     ${escapeHTML(item.status || "New")}
                 </span>
             </td>
-
+<td>
+    <button
+        type="button"
+        onclick="showDetails('${item.id}')"
+    >
+        👁️ Details
+    </button>
+</td>
         </tr>
 
     `).join("");
