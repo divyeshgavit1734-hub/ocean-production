@@ -381,22 +381,7 @@ const newBudget = registrations
 
 document.getElementById("newBudget").textContent =
     "₹" + newBudget.toLocaleString("en-IN");
-const completedBudget = registrations
-    .filter(item => item.status === "Completed")
-    .reduce((total, item) => {
 
-        const amount = parseFloat(
-            String(item.budget || "")
-                .replace(/[^\d.]/g, "")
-        );
-
-        return total + (isNaN(amount) ? 0 : amount);
-
-    }, 0);
-
-document.getElementById("completedBudget").textContent =
-    "₹" + completedBudget.toLocaleString("en-IN");
-    
 updateStats();
 
     renderRegistrations(registrations);
