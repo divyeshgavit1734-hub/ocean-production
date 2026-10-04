@@ -622,6 +622,21 @@ function openWhatsApp(number) {
         "_blank"
     );
 }
+function callCustomer(number) {
+
+    if (!number) {
+        alert("Customer mobile number is not available.");
+        return;
+    }
+
+    let cleanNumber = number.replace(/\D/g, "");
+
+    if (cleanNumber.length === 10) {
+        cleanNumber = "91" + cleanNumber;
+    }
+
+    window.location.href = "tel:+" + cleanNumber;
+}
 async function deleteRegistration(id) {
 
     const confirmed = confirm(
