@@ -320,20 +320,20 @@ function escapeHTML(value) {
 async function checkLogin() {
 
     const {
-        data: { session }
+        data: { session },
+        error
     } = await db.auth.getSession();
 
+    if (error || !session) {
 
-    if (!session) {
+        await db.auth.signOut();
 
         window.location.replace("admin.html");
 
         return false;
     }
 
-
     return true;
-
 }
 
 
