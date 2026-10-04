@@ -256,7 +256,7 @@ form.addEventListener("submit", async function(event) {
         console.error(error);
 
         formMessage.textContent =
-            "Registration failed. Please try again.";
+    "Registration failed: " + (error.message || "Unknown error");
 
     } finally {
 
