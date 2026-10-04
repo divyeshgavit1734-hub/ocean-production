@@ -192,6 +192,10 @@
     <div id="eventCalendar"></div>
 
 </div>
+<div class="stat-card">
+    <h3>💰 Total Budget</h3>
+    <p id="totalBudget">₹0</p>
+</div>
 
 
     <div class="search-box">
@@ -351,8 +355,18 @@ async function loadRegistrations() {
 
 
     registrations = data || [];
+const totalBudget = registrations.reduce((total, item) => {
+    const amount = parseFloat(
+        String(item.budget || "").replace(/[^\d.]/g, "")
+    );
 
-    updateStats();
+    return total + (isNaN(amount) ? 0 : amount);
+}, 0);
+
+document.getElementById("totalBudget").textContent =
+    "₹" + totalBudget.toLocaleString("en-IN");
+    
+updateStats();
 
     renderRegistrations(registrations);
 
