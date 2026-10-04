@@ -484,6 +484,8 @@ function renderRegistrations(items) {
     onclick="callCustomer('${item.mobile}')"
 >
     📞 Call
+</button><button type="button" onclick="exportRegistrationsCSV()">
+    📥 Export CSV
 </button>
 <button
     type="button"
@@ -641,6 +643,76 @@ function callCustomer(number) {
     }
 
     window.open("tel:+" + cleanNumber);
+}
+function exportRegistrationsCSV() {
+
+    if (!registrations || registrations.length === 0) {
+        alert("No registrations available to export.");
+        return;
+    }
+
+    const headers = [
+        "Registration ID",
+        "Name",
+        "Mobile",
+        "WhatsApp",
+        "Email",
+        "Event Type",
+        "Event Date",
+        "Event Time",
+        "Venue",
+        "City",
+        "Guests",
+        "Services",
+        "Budget",
+        "Requirements",
+        "Status",
+        "Created At"
+    ];
+
+    const rows = registrations.map(item => [
+        item.registration_id,
+        item.full_name,
+        item.mobile,
+        item.whatsapp,
+        item.email,
+        item.event_type,
+        item.event_date,
+        item.event_time,
+        item.venue,
+        item.city,
+        item.guests,
+        item.services,
+        item.budget,
+        item.requirements,
+        item.status,
+        item.created_at
+    ]);
+
+    const csv = [
+        headers,
+        ...rows
+    ].map(row =>
+        row.map(value =>
+            `"${String(value ?? "").replace(/"/g, '""')}"`
+        ).join(",")
+    ).join("\n");
+
+    const blob = new Blob([csv], {
+        type: "text/csv;charset=utf-8;"
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "ocean-production-registrations.csv";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
 }
 async function printRegistration(id) {
 
