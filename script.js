@@ -243,7 +243,7 @@ form.addEventListener("submit", async function(event) {
             .getElementById("successBox")
             .classList
             .remove("hidden");
-
+launchFireworks();
 
         window.scrollTo({
             top: 0,
