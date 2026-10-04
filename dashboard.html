@@ -185,7 +185,13 @@
             <strong id="upcomingCount">0</strong>
         </div>
 
-    </div>
+    </div><div class="calendar-section">
+
+    <h2>📅 Event Calendar</h2>
+
+    <div id="eventCalendar"></div>
+
+</div>
 
 
     <div class="search-box">
@@ -808,6 +814,41 @@ async function printRegistration(id) {
 
     printWindow.document.write(receipt);
     printWindow.document.close();
+}
+function renderEventCalendar() {
+
+    const calendar = document.getElementById("eventCalendar");
+
+    if (!registrations || registrations.length === 0) {
+        calendar.innerHTML = "<p>No upcoming events.</p>";
+        return;
+    }
+
+    const events = registrations
+        .filter(item => item.event_date)
+        .sort((a, b) =>
+            new Date(a.event_date) - new Date(b.event_date)
+        );
+
+    calendar.innerHTML = events.map(item => `
+        <div style="
+            border:1px solid #ddd;
+            border-radius:10px;
+            padding:15px;
+            margin:10px 0;
+            background:#f8f9fa;
+        ">
+            <strong>📅 ${item.event_date}</strong>
+            <br>
+            🎉 ${item.event_type || "Event"}
+            <br>
+            👤 ${item.full_name || "-"}
+            <br>
+            📍 ${item.venue || "-"}
+            <br>
+            🏙️ ${item.city || "-"}
+        </div>
+    `).join("");
 }
 async function deleteRegistration(id) {
 
