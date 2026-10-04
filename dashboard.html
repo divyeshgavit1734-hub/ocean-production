@@ -468,7 +468,12 @@ function renderRegistrations(items) {
    <button type="button" onclick="showDetails('${item.id}')">
     Details
 </button>
-
+<button
+    type="button"
+    onclick="openWhatsApp('${item.whatsapp || item.mobile}')"
+>
+    📱 WhatsApp
+</button>
 <button
     type="button"
     onclick="deleteRegistration('${item.id}')"
