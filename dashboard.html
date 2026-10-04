@@ -467,6 +467,11 @@ function renderRegistrations(items) {
 <td>
    <button type="button" onclick="showDetails('${item.id}')">
     Details
+</button><button
+    type="button"
+    onclick="printRegistration('${item.id}')"
+>
+    🖨️ Print
 </button>
 <button
     type="button"
@@ -636,6 +641,101 @@ function callCustomer(number) {
     }
 
     window.open("tel:+" + cleanNumber);
+}
+async function printRegistration(id) {
+
+    const { data, error } = await db
+        .from("registrations")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        alert("Could not load registration:\n" + error.message);
+        return;
+    }
+
+    const receipt = `
+        <html>
+        <head>
+            <title>Ocean Production - Registration</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 30px;
+                    max-width: 700px;
+                    margin: auto;
+                }
+
+                h1 {
+                    text-align: center;
+                }
+
+                .box {
+                    border: 1px solid #333;
+                    padding: 20px;
+                    margin-top: 20px;
+                }
+
+                p {
+                    margin: 8px 0;
+                }
+            </style>
+        </head>
+
+        <body>
+
+            <h1>OCEAN PRODUCTION</h1>
+            <p style="text-align:center;">Event Registration</p>
+
+            <div class="box">
+
+                <p><strong>Registration ID:</strong> ${data.registration_id || "-"}</p>
+
+                <hr>
+
+                <p><strong>Name:</strong> ${data.full_name || "-"}</p>
+                <p><strong>Mobile:</strong> ${data.mobile || "-"}</p>
+                <p><strong>WhatsApp:</strong> ${data.whatsapp || "-"}</p>
+                <p><strong>Email:</strong> ${data.email || "-"}</p>
+
+                <hr>
+
+                <p><strong>Event:</strong> ${data.event_type || "-"}</p>
+                <p><strong>Date:</strong> ${data.event_date || "-"}</p>
+                <p><strong>Time:</strong> ${data.event_time || "-"}</p>
+                <p><strong>Venue:</strong> ${data.venue || "-"}</p>
+                <p><strong>City:</strong> ${data.city || "-"}</p>
+                <p><strong>Guests:</strong> ${data.guests || "-"}</p>
+
+                <hr>
+
+                <p><strong>Services:</strong> ${data.services || "-"}</p>
+                <p><strong>Budget:</strong> ${data.budget || "-"}</p>
+                <p><strong>Requirements:</strong> ${data.requirements || "-"}</p>
+                <p><strong>Status:</strong> ${data.status || "New"}</p>
+
+            </div>
+
+            <script>
+                window.onload = function() {
+                    window.print();
+                };
+            </script>
+
+        </body>
+        </html>
+    `;
+
+    const printWindow = window.open("", "_blank");
+
+    if (!printWindow) {
+        alert("Please allow pop-ups for this website.");
+        return;
+    }
+
+    printWindow.document.write(receipt);
+    printWindow.document.close();
 }
 async function deleteRegistration(id) {
 
