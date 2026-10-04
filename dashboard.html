@@ -1035,8 +1035,15 @@ async function deleteRegistration(id) {
 
     alert("Registration deleted successfully.");
 
-    loadRegistrations();
-}
+    checkLogin().then(loggedIn => {
+
+    if (loggedIn) {
+        loadRegistrations();
+    }
+
+});
+ }
+
 </script>
 
 </body>
