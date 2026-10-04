@@ -196,6 +196,10 @@
     <h3>💰 Total Budget</h3>
     <p id="totalBudget">₹0</p>
 </div>
+<div class="stat-card">
+    <h3>🆕 New Budget</h3>
+    <p id="newBudget">₹0</p>
+</div>
 
 
     <div class="search-box">
@@ -365,6 +369,18 @@ const totalBudget = registrations.reduce((total, item) => {
 
 document.getElementById("totalBudget").textContent =
     "₹" + totalBudget.toLocaleString("en-IN");
+const newBudget = registrations
+    .filter(item => item.status === "New")
+    .reduce((total, item) => {
+        const amount = parseFloat(
+            String(item.budget || "").replace(/[^\d.]/g, "")
+        );
+
+        return total + (isNaN(amount) ? 0 : amount);
+    }, 0);
+
+document.getElementById("newBudget").textContent =
+    "₹" + newBudget.toLocaleString("en-IN");
     
 updateStats();
 
