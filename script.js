@@ -266,5 +266,53 @@ form.addEventListener("submit", async function(event) {
             "Submit Registration";
 
     }
+function launchFireworks() {
+
+    const fireworks = document.getElementById("fireworks");
+
+    if (!fireworks) return;
+
+    fireworks.innerHTML = "";
+
+    for (let i = 0; i < 5; i++) {
+
+        const burst = document.createElement("div");
+
+        burst.style.position = "absolute";
+        burst.style.left = (20 + Math.random() * 60) + "%";
+        burst.style.top = (15 + Math.random() * 45) + "%";
+        burst.style.width = "8px";
+        burst.style.height = "8px";
+        burst.style.borderRadius = "50%";
+        burst.style.background = "#ffcc00";
+        burst.style.boxShadow =
+            "0 0 20px #ffcc00, 0 0 40px #ff6600";
+
+        fireworks.appendChild(burst);
+
+        burst.animate(
+            [
+                {
+                    transform: "scale(0)",
+                    opacity: 1
+                },
+                {
+                    transform: "scale(18)",
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 1200,
+                delay: i * 250,
+                easing: "ease-out",
+                fill: "forwards"
+            }
+        );
+    }
+
+    setTimeout(function() {
+        fireworks.innerHTML = "";
+    }, 3000);
+}
 
 });
