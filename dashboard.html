@@ -492,6 +492,11 @@ function renderRegistrations(items) {
     📞 Call
 </button><button type="button" onclick="exportRegistrationsCSV()">
     📥 Export CSV
+</button><button
+    type="button"
+    onclick="confirmBooking('${item.id}', '${item.whatsapp || item.mobile}')"
+>
+    ✅ Confirm Booking
 </button>
 <button
     type="button"
@@ -649,6 +654,50 @@ function callCustomer(number) {
     }
 
     window.open("tel:+" + cleanNumber);
+}
+async function confirmBooking(id, number) {
+
+    const confirmed = confirm(
+        "Confirm this booking?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const { error } = await db
+        .from("registrations")
+        .update({ status: "Confirmed" })
+        .eq("id", id);
+
+    if (error) {
+        alert("Could not confirm booking:\n" + error.message);
+        return;
+    }
+
+    alert("Booking confirmed successfully.");
+
+    if (number) {
+        let cleanNumber = number.replace(/\D/g, "");
+
+        if (cleanNumber.length === 10) {
+            cleanNumber = "91" + cleanNumber;
+        }
+
+        const message =
+            "Hello! Your event registration with Ocean Production has been confirmed. " +
+            "We look forward to serving you. Thank you!";
+
+        window.open(
+            "https://wa.me/" +
+            cleanNumber +
+            "?text=" +
+            encodeURIComponent(message),
+            "_blank"
+        );
+    }
+
+    loadRegistrations();
 }
 function exportRegistrationsCSV() {
 
