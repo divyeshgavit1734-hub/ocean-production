@@ -476,6 +476,12 @@ function renderRegistrations(items) {
 </button>
 <button
     type="button"
+    onclick="callCustomer('${item.mobile}')"
+>
+    📞 Call
+</button>
+<button
+    type="button"
     onclick="deleteRegistration('${item.id}')"
 >
     🗑️ Delete
