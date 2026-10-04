@@ -211,7 +211,10 @@
     <h3>❌ Cancelled Budget</h3>
     <p id="cancelledBudget">₹0</p>
 </div>
-
+<div class="stat-card">
+    <h3>📊 Registration Status</h3>
+    <p id="statusSummary">0 New | 0 Confirmed | 0 Completed | 0 Cancelled</p>
+</div>
 
     <div class="search-box">
 
@@ -437,7 +440,27 @@ const cancelledBudget = registrations
 
 document.getElementById("cancelledBudget").textContent =
     "₹" + cancelledBudget.toLocaleString("en-IN");
+const newCount = registrations.filter(
+    item => item.status === "New"
+).length;
 
+const confirmedCount = registrations.filter(
+    item => item.status === "Confirmed"
+).length;
+
+const completedCount = registrations.filter(
+    item => item.status === "Completed"
+).length;
+
+const cancelledCount = registrations.filter(
+    item => item.status === "Cancelled"
+).length;
+
+document.getElementById("statusSummary").textContent =
+    newCount + " New | " +
+    confirmedCount + " Confirmed | " +
+    completedCount + " Completed | " +
+    cancelledCount + " Cancelled";
 updateStats();
 
     renderRegistrations(registrations);
