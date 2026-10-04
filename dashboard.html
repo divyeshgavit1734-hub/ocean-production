@@ -215,7 +215,10 @@
     <h3>📊 Registration Status</h3>
     <p id="statusSummary">0 New | 0 Confirmed | 0 Completed | 0 Cancelled</p>
 </div>
-
+<div class="stat-card">
+    <h3>📝 Total Registrations</h3>
+    <p id="totalRegistrations">0</p>
+</div>
     <div class="search-box">
 
         <input
@@ -373,6 +376,8 @@ async function loadRegistrations() {
 
 
     registrations = data || [];
+document.getElementById("totalRegistrations").textContent =
+    registrations.length;
 const totalBudget = registrations.reduce((total, item) => {
     const amount = parseFloat(
         String(item.budget || "").replace(/[^\d.]/g, "")
