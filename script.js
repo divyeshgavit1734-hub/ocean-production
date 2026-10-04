@@ -244,7 +244,7 @@ form.addEventListener("submit", async function(event) {
             .classList
             .remove("hidden");
 launchFireworks();
-
+alert("Fireworks function called!");
         window.scrollTo({
             top: 0,
             behavior: "smooth"
