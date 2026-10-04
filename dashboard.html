@@ -199,6 +199,17 @@
 <div class="stat-card">
     <h3>🆕 New Budget</h3>
     <p id="newBudget">₹0</p>
+</div><div class="stat-card">
+    <h3>✅ Completed Budget</h3>
+    <p id="completedBudget">₹0</p>
+</div>
+<div class="stat-card">
+    <h3>📋 Confirmed Budget</h3>
+    <p id="confirmedBudget">₹0</p>
+</div>
+<div class="stat-card">
+    <h3>❌ Cancelled Budget</h3>
+    <p id="cancelledBudget">₹0</p>
 </div>
 
 
@@ -381,6 +392,51 @@ const newBudget = registrations
 
 document.getElementById("newBudget").textContent =
     "₹" + newBudget.toLocaleString("en-IN");
+const completedBudget = registrations
+    .filter(item => item.status === "Completed")
+    .reduce((total, item) => {
+
+        const amount = parseFloat(
+            String(item.budget || "")
+                .replace(/[^\d.]/g, "")
+        );
+
+        return total + (isNaN(amount) ? 0 : amount);
+
+    }, 0);
+
+document.getElementById("completedBudget").textContent =
+    "₹" + completedBudget.toLocaleString("en-IN");
+const confirmedBudget = registrations
+    .filter(item => item.status === "Confirmed")
+    .reduce((total, item) => {
+
+        const amount = parseFloat(
+            String(item.budget || "")
+                .replace(/[^\d.]/g, "")
+        );
+
+        return total + (isNaN(amount) ? 0 : amount);
+
+    }, 0);
+
+document.getElementById("confirmedBudget").textContent =
+    "₹" + confirmedBudget.toLocaleString("en-IN");
+const cancelledBudget = registrations
+    .filter(item => item.status === "Cancelled")
+    .reduce((total, item) => {
+
+        const amount = parseFloat(
+            String(item.budget || "")
+                .replace(/[^\d.]/g, "")
+        );
+
+        return total + (isNaN(amount) ? 0 : amount);
+
+    }, 0);
+
+document.getElementById("cancelledBudget").textContent =
+    "₹" + cancelledBudget.toLocaleString("en-IN");
 
 updateStats();
 
