@@ -476,7 +476,7 @@ function renderRegistrations(items) {
 </button>
 <button
     type="button"
-    onclick="alert(typeof callCustomer)"
+    onclick="callCustomer('${item.mobile}')"
 >
     📞 Call
 </button>
@@ -635,7 +635,7 @@ function callCustomer(number) {
         cleanNumber = "91" + cleanNumber;
     }
 
-    window.location.href = "tel:+" + cleanNumber;
+    window.open("tel:+" + cleanNumber);
 }
 async function deleteRegistration(id) {
 
