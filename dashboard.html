@@ -598,6 +598,24 @@ async function updateStatus(id, newStatus) {
 
     loadRegistrations();
 }
+function openWhatsApp(number) {
+
+    if (!number) {
+        alert("WhatsApp number is not available.");
+        return;
+    }
+
+    let cleanNumber = number.replace(/\D/g, "");
+
+    if (cleanNumber.length === 10) {
+        cleanNumber = "91" + cleanNumber;
+    }
+
+    window.open(
+        "https://wa.me/" + cleanNumber,
+        "_blank"
+    );
+}
 async function deleteRegistration(id) {
 
     const confirmed = confirm(
