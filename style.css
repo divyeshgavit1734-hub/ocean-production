@@ -291,6 +291,10 @@ footer strong {
     .logo {
         font-size: 23px;
     }
+}
+
+/* ADMIN LOGIN */
+
 .admin-login-link {
     display: inline-block;
     margin: 15px;
@@ -305,6 +309,9 @@ footer strong {
 .admin-login-link:hover {
     opacity: 0.85;
 }
+
+/* DETAILS BUTTON */
+
 .details-button {
     background: #6f42c1;
     border: none;
@@ -314,4 +321,13 @@ footer strong {
 .details-button:hover {
     opacity: 0.85;
 }
+
+/* FIREWORKS */
+
+#fireworks {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
 }
