@@ -325,5 +325,72 @@ checkAdmin();
 
 
 </body>
+<script>
+document.getElementById("staffForm").addEventListener("submit", async function(e) {
 
+    e.preventDefault();
+
+    const button = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+
+    button.disabled = true;
+    button.textContent = "Creating Staff...";
+
+    const staffData = {
+        full_name: document.getElementById("fullName").value.trim(),
+        mobile: document.getElementById("mobile").value.trim(),
+        whatsapp: document.getElementById("whatsapp").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        address: document.getElementById("address").value.trim(),
+        joining_date: document.getElementById("joiningDate").value,
+        role: document.getElementById("role").value.trim(),
+        password: document.getElementById("password").value
+    };
+
+    const { data, error } = await db.functions.invoke(
+        "create-staff",
+        {
+            body: staffData
+        }
+    );
+
+    if (error) {
+
+        message.style.color = "red";
+        message.textContent = "❌ " + error.message;
+
+        button.disabled = false;
+        button.textContent = "Create Staff Account";
+
+        return;
+    }
+
+    if (data?.error) {
+
+        message.style.color = "red";
+        message.textContent = "❌ " + data.error;
+
+        button.disabled = false;
+        button.textContent = "Create Staff Account";
+
+        return;
+    }
+
+    message.style.color = "green";
+
+    message.innerHTML = `
+        ✅ Staff Created Successfully!<br><br>
+        <strong>Staff ID:</strong> ${data.staff.staff_id}<br>
+        <strong>Name:</strong> ${data.staff.full_name}<br>
+        <strong>Email:</strong> ${data.staff.email}<br><br>
+        ⚠️ Give the Staff ID and password to the staff member securely.
+    `;
+
+    document.getElementById("staffForm").reset();
+
+    button.disabled = false;
+    button.textContent = "Create Staff Account";
+
+});
+</script>
 </html>
