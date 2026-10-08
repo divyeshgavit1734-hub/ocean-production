@@ -98,6 +98,40 @@
     </style>
 
 </head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://nepianzfbysukaoqqbxf.supabase.co";
+const SUPABASE_KEY = "sb_publishable_vA6sXJTvJO5QWY6BPyH79g_muuyN9_8";
+
+const db = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+async function checkAdmin() {
+
+    const {
+        data: { session }
+    } = await db.auth.getSession();
+
+    if (!session) {
+        window.location.replace("admin.html");
+        return;
+    }
+
+    const role = session.user.app_metadata?.role;
+
+    if (role !== "admin") {
+        alert("Access denied. Admin only.");
+        await db.auth.signOut();
+        window.location.replace("staff.html");
+        return;
+    }
+}
+
+checkAdmin();
+</script>
 
 
 <body>
