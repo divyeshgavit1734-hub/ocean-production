@@ -121,7 +121,80 @@
 
 
 <body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+
+const SUPABASE_URL =
+    "https://nepianzfbysukaoqqbxf.supabase.co";
+
+/*
+Use the SAME current Supabase Publishable key
+that you use in your admin.html.
+
+Do NOT use a secret/service_role key.
+*/
+
+const SUPABASE_KEY =
+    "sb_publishable_vA6sXJTvJO5QWY6BPyH79g_muuyN9_8";
+
+const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+const form =
+    document.getElementById("staffLoginForm");
+
+const message =
+    document.getElementById("message");
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+
+        message.textContent =
+            "Logging in...";
+
+
+        const { data, error } =
+            await db.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
+
+
+        if (error) {
+
+            message.textContent =
+                "❌ Login failed: " +
+                error.message;
+
+            return;
+        }
+
+
+        message.textContent =
+            "✅ Login successful!";
+
+    }
+);
+
+</script>
     <div class="login-box">
 
         <h1>🌊 Ocean Production</h1>
