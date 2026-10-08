@@ -19,230 +19,80 @@
         }
 
         body {
-
             margin: 0;
-
             font-family: Arial, sans-serif;
-
             background: #f3f4f6;
-
             color: #111827;
         }
 
         .header {
-
             background: #0b1220;
-
             color: white;
-
-            padding: 20px;
-
+            padding: 25px;
             text-align: center;
         }
 
         .header h1 {
-
             margin: 0;
-
-            font-size: 26px;
-        }
-
-        .header p {
-
-            margin: 6px 0 0;
-
-            color: #cbd5e1;
         }
 
         .container {
-
             width: 92%;
-
-            max-width: 850px;
-
+            max-width: 700px;
             margin: 30px auto;
         }
 
         .card {
-
             background: white;
-
             padding: 25px;
-
             border-radius: 16px;
-
-            box-shadow:
-                0 10px 30px rgba(0,0,0,0.08);
-        }
-
-        h2 {
-
-            margin-top: 0;
-
-            margin-bottom: 20px;
-        }
-
-        .grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         .field {
-
-            display: flex;
-
-            flex-direction: column;
-        }
-
-        .full {
-
-            grid-column: 1 / -1;
+            margin-bottom: 18px;
         }
 
         label {
-
+            display: block;
             font-weight: bold;
-
             margin-bottom: 7px;
         }
 
         input,
         select,
         textarea {
-
             width: 100%;
-
-            padding: 12px;
-
+            padding: 13px;
             border: 1px solid #d1d5db;
-
             border-radius: 8px;
-
-            font-size: 15px;
-
-            font-family: inherit;
+            font-size: 16px;
         }
 
         textarea {
-
             resize: vertical;
         }
 
-        .services {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 10px;
-
-            margin-top: 8px;
-        }
-
-        .service {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            padding: 10px;
-
-            border: 1px solid #e5e7eb;
-
-            border-radius: 8px;
-
-            font-weight: normal;
-        }
-
-        .service input {
-
-            width: auto;
-        }
-
-        .submit-area {
-
-            margin-top: 25px;
-
-            text-align: center;
-        }
-
         button {
-
             width: 100%;
-
             padding: 14px;
-
             border: none;
-
             border-radius: 8px;
-
             background: #111827;
-
             color: white;
-
             font-size: 16px;
-
             font-weight: bold;
-
             cursor: pointer;
         }
 
         button:disabled {
-
             opacity: 0.6;
-
-            cursor: not-allowed;
         }
 
         #message {
-
             margin-top: 15px;
-
             text-align: center;
-
             font-weight: bold;
-        }
-
-        .logout {
-
-            display: block;
-
-            margin-top: 15px;
-
-            text-align: center;
-
-            color: #dc2626;
-
-            text-decoration: none;
-
-            font-weight: bold;
-        }
-
-        @media (max-width: 650px) {
-
-            .grid {
-
-                grid-template-columns: 1fr;
-            }
-
-            .services {
-
-                grid-template-columns: 1fr;
-            }
-
-            .full {
-
-                grid-column: auto;
-            }
-
         }
 
     </style>
@@ -257,7 +107,7 @@
 
     <h1>🌊 OCEAN PRODUCTION</h1>
 
-    <p>Staff Registration Panel</p>
+    <p>Staff Registration</p>
 
 </header>
 
@@ -266,370 +116,174 @@
 
     <div class="card">
 
-        <h2>📝 Customer Registration</h2>
+        <h2>👤 Register New Staff</h2>
 
 
-        <form id="staffRegistrationForm">
+        <form id="staffForm">
 
 
-            <div class="grid">
+            <div class="field">
 
+                <label>Full Name *</label>
 
-                <!-- CUSTOMER DETAILS -->
-
-                <div class="field">
-
-                    <label>Full Name *</label>
-
-                    <input
-                        type="text"
-                        id="fullName"
-                        placeholder="Customer full name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Mobile Number *</label>
-
-                    <input
-                        type="tel"
-                        id="mobile"
-                        placeholder="10 digit mobile number"
-                        pattern="[0-9]{10}"
-                        maxlength="10"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>WhatsApp Number</label>
-
-                    <input
-                        type="tel"
-                        id="whatsapp"
-                        placeholder="WhatsApp number"
-                        pattern="[0-9]{10}"
-                        maxlength="10"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Email</label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="customer@email.com"
-                    >
-
-                </div>
-
-
-                <!-- EVENT DETAILS -->
-
-                <div class="field">
-
-                    <label>Event Type *</label>
-
-                    <select id="eventType" required>
-
-                        <option value="">
-                            Select Event Type
-                        </option>
-
-                        <option>Wedding</option>
-                        <option>Birthday</option>
-                        <option>Engagement</option>
-                        <option>Reception</option>
-                        <option>Corporate Event</option>
-                        <option>College Event</option>
-                        <option>Festival</option>
-                        <option>Garba Event</option>
-                        <option>Product Launch</option>
-                        <option>Concert</option>
-                        <option>Other</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Event Date *</label>
-
-                    <input
-                        type="date"
-                        id="eventDate"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Event Time</label>
-
-                    <input
-                        type="time"
-                        id="eventTime"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Expected Guests</label>
-
-                    <input
-                        type="number"
-                        id="guests"
-                        min="1"
-                        placeholder="e.g. 500"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Venue *</label>
-
-                    <input
-                        type="text"
-                        id="venue"
-                        placeholder="Event venue"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>City</label>
-
-                    <input
-                        type="text"
-                        id="city"
-                        placeholder="City"
-                    >
-
-                </div>
-
-
-                <!-- SERVICES -->
-
-                <div class="field full">
-
-                    <label>Services Required</label>
-
-                    <div class="services">
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="Cold Pyro"
-                            >
-
-                            Cold Pyro
-
-                        </label>
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="Confetti"
-                            >
-
-                            Confetti
-
-                        </label>
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="CO2 Gun"
-                            >
-
-                            CO₂ Gun
-
-                        </label>
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="Paper Blower"
-                            >
-
-                            Paper Blower
-
-                        </label>
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="Stage Effects"
-                            >
-
-                            Stage Effects
-
-                        </label>
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="Drone Show"
-                            >
-
-                            Drone Show
-
-                        </label>
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="Backstage Effects"
-                            >
-
-                            Backstage Effects
-
-                        </label>
-
-
-                        <label class="service">
-
-                            <input
-                                type="checkbox"
-                                name="service"
-                                value="Other"
-                            >
-
-                            Other
-
-                        </label>
-
-
-                    </div>
-
-                </div>
-
-
-                <!-- BUDGET -->
-
-                <div class="field">
-
-                    <label>Approximate Budget</label>
-
-                    <select id="budget">
-
-                        <option value="">
-                            Select Budget
-                        </option>
-
-                        <option value="Below ₹10,000">
-                            Below ₹10,000
-                        </option>
-
-                        <option value="₹10,000 - ₹25,000">
-                            ₹10,000 - ₹25,000
-                        </option>
-
-                        <option value="₹25,000 - ₹50,000">
-                            ₹25,000 - ₹50,000
-                        </option>
-
-                        <option value="₹50,000 - ₹1,00,000">
-                            ₹50,000 - ₹1,00,000
-                        </option>
-
-                        <option value="₹1,00,000+">
-                            ₹1,00,000+
-                        </option>
-
-                        <option value="Not Decided">
-                            Not Decided
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Additional Requirements</label>
-
-                    <textarea
-                        id="requirements"
-                        rows="4"
-                        placeholder="Customer requirements..."
-                    ></textarea>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="submit-area">
-
-                <button
-                    type="submit"
-                    id="submitButton"
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter staff full name"
+                    required
                 >
-                    📝 Submit Registration
-                </button>
-
-                <div id="message"></div>
 
             </div>
+
+
+            <div class="field">
+
+                <label>Mobile Number *</label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="10 digit mobile number"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>WhatsApp Number</label>
+
+                <input
+                    type="tel"
+                    id="whatsapp"
+                    placeholder="WhatsApp number"
+                    pattern="[0-9]{10}"
+                    maxlength="10"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Email *</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="staff@email.com"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Address</label>
+
+                <textarea
+                    id="address"
+                    rows="3"
+                    placeholder="Staff address"
+                ></textarea>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Joining Date</label>
+
+                <input
+                    type="date"
+                    id="joiningDate"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Staff Role *</label>
+
+                <select id="role" required>
+
+                    <option value="">
+                        Select Role
+                    </option>
+
+                    <option value="Event Production">
+                        Event Production
+                    </option>
+
+                    <option value="Front Stage">
+                        Front Stage
+                    </option>
+
+                    <option value="Back Stage">
+                        Back Stage
+                    </option>
+
+                    <option value="CO2 Team">
+                        CO₂ Team
+                    </option>
+
+                    <option value="Pyro Team">
+                        Pyro Team
+                    </option>
+
+                    <option value="Driver">
+                        Driver
+                    </option>
+
+                    <option value="Technician">
+                        Technician
+                    </option>
+
+                    <option value="Event Coordinator">
+                        Event Coordinator
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>Staff Password *</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create login password"
+                    minlength="6"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="submitButton"
+            >
+                ➕ Create Staff Account
+            </button>
+
+
+            <div id="message"></div>
 
 
         </form>
-
-
-        <a
-            href="#"
-            class="logout"
-            id="logoutButton"
-        >
-            🔓 Staff Logout
-        </a>
-
 
     </div>
 
